@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History - Diabetes System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 Diabetes Prediction System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                <li><a href="{{ url_for('history') }}" class="active">History</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="history-section">
+            <h2>Prediction History & Statistics</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Total Predictions</p>
+                        <p class="stat-value">{{ stats.total_predictions }}</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Diabetic</p>
+                        <p class="stat-value">{{ stats.diabetic_count }}</p>
+                        <p class="stat-percentage">{{ "%.1f"|format(stats.diabetic_percentage) }}%</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Non-Diabetic</p>
+                        <p class="stat-value">{{ stats.non_diabetic_count }}</p>
+                        <p class="stat-percentage">{{ "%.1f"|format(100 - stats.diabetic_percentage) }}%</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <p class="stat-label">Avg Confidence</p>
+                        <p class="stat-value">{{ "%.4f"|format(stats.average_confidence) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-controls">
+                <a href="{{ url_for('predict') }}" class="btn btn-primary">+ New Prediction</a>
+            </div>
+
+            {% if predictions %}
+            <div class="predictions-table">
+                <h3>Recent Predictions</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Age</th>
+                            <th>Glucose</th>
+                            <th>BMI</th>
+                            <th>Prediction</th>
+                            <th>Confidence</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pred in predictions %}
+                        <tr class="{% if pred['prediction'] == 1 %}diabetic-row{% else %}non-diabetic-row{% endif %}">
+                            <td><strong>#{{ pred['id'] }}</strong></td>
+                            <td>{{ pred['timestamp'][:10] }}</td>
+                            <td>{{ pred['age'] }}</td>
+                            <td>{{ pred['glucose'] }}</td>
+                            <td>{{ "%.2f"|format(pred['bmi']) }}</td>
+                            <td>
+                                <span class="badge {% if pred['prediction'] == 1 %}badge-danger{% else %}badge-success{% endif %}">
+                                    {{ pred['prediction_text'] }}
+                                </span>
+                            </td>
+                            <td>{{ "%.4f"|format(pred['confidence']) }}</td>
+                            <td>
+                                <a href="{{ url_for('results', record_id=pred['id']) }}" class="btn btn-small btn-primary">View</a>
+                                <button class="btn btn-small btn-danger" onclick="deleteRecord({{ pred['id'] }})">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>No predictions yet</p>
+                <a href="{{ url_for('predict') }}" class="btn btn-primary">Make First Prediction</a>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Diabetes Prediction System</p>
+    </footer>
+
+    <script>
+        function deleteRecord(recordId) {
+            if (confirm('Are you sure you want to delete this record?')) {
+                fetch(`/delete/${recordId}`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Record deleted successfully');
+                        location.reload();
+                    } else {
+                        alert('Error deleting record');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+</body>
+</html>

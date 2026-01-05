@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Diabetes System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 Diabetes Prediction System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                <li><a href="{{ url_for('history') }}">History</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="about-section">
+            <h2>About This System</h2>
+
+            <div class="about-content">
+                <h3>🎯 Overview</h3>
+                <p>
+                    The Diabetes Prediction System is a machine learning application that uses 
+                    advanced algorithms to predict the likelihood of diabetes based on medical data. 
+                    It's designed to assist healthcare professionals in identifying at-risk patients.
+                </p>
+
+                <h3>🤖 Machine Learning Model</h3>
+                <div class="info-box">
+                    <p><strong>Algorithm:</strong> Support Vector Machine (SVM)</p>
+                    <p><strong>Kernel:</strong> Linear</p>
+                    <p><strong>Training Data:</strong> PIMA Diabetes Dataset (768 records)</p>
+                    <p><strong>Training Set:</strong> 614 samples (80%)</p>
+                    <p><strong>Test Set:</strong> 154 samples (20%)</p>
+                    <p><strong>Expected Accuracy:</strong> ~77%</p>
+                </div>
+
+                <h3>📊 Input Features</h3>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <strong>1. Pregnancies</strong> - Number of times pregnant
+                    </div>
+                    <div class="feature-item">
+                        <strong>2. Glucose</strong> - Plasma glucose concentration (mg/dL)
+                    </div>
+                    <div class="feature-item">
+                        <strong>3. Blood Pressure</strong> - Diastolic blood pressure (mm Hg)
+                    </div>
+                    <div class="feature-item">
+                        <strong>4. Skin Thickness</strong> - Triceps skin fold thickness (mm)
+                    </div>
+                    <div class="feature-item">
+                        <strong>5. Insulin</strong> - 2-Hour serum insulin (mu U/ml)
+                    </div>
+                    <div class="feature-item">
+                        <strong>6. BMI</strong> - Body mass index (kg/m²)
+                    </div>
+                    <div class="feature-item">
+                        <strong>7. Diabetes Pedigree Function</strong> - Genetic predisposition
+                    </div>
+                    <div class="feature-item">
+                        <strong>8. Age</strong> - Age in years
+                    </div>
+                </div>
+
+                <h3>💾 Data Storage</h3>
+                <div class="info-box">
+                    <p>
+                        All predictions are securely stored in a SQLite3 database. 
+                        This allows for complete prediction history tracking, statistical analysis, 
+                        and feedback collection for model improvement.
+                    </p>
+                </div>
+
+                <h3>✨ Key Features</h3>
+                <ul class="features-ul">
+                    <li>Instant diabetes risk prediction</li>
+                    <li>Confidence score for each prediction</li>
+                    <li>Complete prediction history</li>
+                    <li>Statistical analysis and reporting</li>
+                    <li>SQLite3 database storage</li>
+                    <li>User feedback system</li>
+                    <li>Professional medical data validation</li>
+                    <li>Secure and private</li>
+                    <li>User-friendly web interface</li>
+                    <li>Export capabilities</li>
+                </ul>
+
+                <h3>⚕️ Medical Disclaimer</h3>
+                <div class="warning-box">
+                    <p>
+                        <strong>IMPORTANT:</strong> This system is for educational and demonstration purposes only. 
+                        It should not be used for actual medical diagnosis or treatment decisions. 
+                        Always consult with qualified healthcare professionals for medical advice.
+                    </p>
+                </div>
+
+                <h3>🔒 Privacy & Security</h3>
+                <p>
+                    Your data is stored locally in a SQLite database. No information is sent to external servers. 
+                    All predictions remain confidential and are only accessible through this application.
+                </p>
+
+                <h3>📚 Technologies Used</h3>
+                <ul class="tech-list">
+                    <li>Python 3.7+</li>
+                    <li>Flask (Web Framework)</li>
+                    <li>scikit-learn (Machine Learning)</li>
+                    <li>SQLite3 (Database)</li>
+                    <li>HTML5, CSS3, JavaScript (Frontend)</li>
+                </ul>
+
+                <h3>👨‍💼 Author</h3>
+                <p>
+                    <strong>Diabetes Prediction System</strong> - Educational Machine Learning Project
+                </p>
+
+                <h3>📄 License</h3>
+                <p>
+                    An open-source educational project for learning machine learning concepts.
+                </p>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <h3>Quick Links</h3>
+            <div class="links-grid">
+                <a href="{{ url_for('predict') }}" class="btn btn-primary">Make Prediction</a>
+                <a href="{{ url_for('history') }}" class="btn btn-primary">View History</a>
+                <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Diabetes Prediction System</p>
+    </footer>
+</body>
+</html>
