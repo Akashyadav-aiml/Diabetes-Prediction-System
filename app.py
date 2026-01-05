@@ -211,11 +211,16 @@ def server_error(e):
 
 
 if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('FLASK_ENV') == 'development'
+    
     print("\n" + "="*60)
     print("DIABETES PREDICTION WEB APPLICATION")
     print("="*60)
-    print("\nServer starting...")
-    print("Open browser and go to: http://127.0.0.1:5000")
+    print(f"\nServer starting on port {port}...")
+    if debug:
+        print("Open browser and go to: http://127.0.0.1:5000")
     print("\nPress Ctrl+C to stop the server\n")
     
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=debug, host='0.0.0.0', port=port)
