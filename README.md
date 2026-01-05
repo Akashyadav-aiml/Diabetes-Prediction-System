@@ -19,7 +19,7 @@ Predict diabetes risk instantly using 8 medical indicators. Powered by Flask, SQ
   ```bash
   python app.py
   ```
-6. Open [http://127.0.0.1:5000](http://127.0.0.1:5000)
+6. Open https://diabetes-prediction-system-t23y.onrender.com
 
 ## ✨ Features
 
