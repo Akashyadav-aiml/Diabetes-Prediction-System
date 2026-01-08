@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 Diabetes Prediction System</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                <li><a href="{{ url_for('history') }}">History</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Welcome to the Diabetes Prediction System</h2>
+            <p>Using Machine Learning to predict diabetes risk based on medical data</p>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">📋</div>
+                    <h3>Make Prediction</h3>
+                    <p>Enter patient medical data to get an instant prediction</p>
+                    <a href="{{ url_for('predict') }}" class="btn btn-primary">Start Prediction</a>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>View History</h3>
+                    <p>Check all previous predictions and statistics</p>
+                    <a href="{{ url_for('history') }}" class="btn btn-primary">View History</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="info">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Enter Patient Data</h4>
+                    <p>Provide 8 medical indicators</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>ML Analysis</h4>
+                    <p>SVM model processes data</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Get Results</h4>
+                    <p>Prediction with confidence score</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Save & Track</h4>
+                    <p>Database stores all predictions</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>About Diabetes Detection</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>🔬 Medical Indicators</h4>
+                    <p>Our system analyzes 8 key medical indicators: Pregnancies, Glucose level, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function, and Age to provide accurate predictions.</p>
+                </div>
+                <div class="info-card">
+                    <h4>🤖 Advanced ML Model</h4>
+                    <p>Uses Support Vector Machine (SVM) algorithm trained on the PIMA Diabetes Dataset with 768 records. Delivers high accuracy predictions with confidence scores for medical decision support.</p>
+                </div>
+                <div class="info-card">
+                    <h4>📈 Data Insights</h4>
+                    <p>Track prediction trends over time, view statistical analysis of your predictions, and understand risk patterns. All data is securely stored in local SQLite3 database.</p>
+                </div>
+                <div class="info-card">
+                    <h4>⚕️ Medical Standard</h4>
+                    <p>Built on standard medical metrics and validated preprocessing techniques. Provides confidence scores and detailed patient data summaries for informed healthcare decisions.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Diabetes Prediction System | By Akash</p>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
+</body>
+</html>
